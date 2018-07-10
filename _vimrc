@@ -60,7 +60,28 @@ set dir=C:\Users\mosera\.cache\vim "Directory to store swap files."
 set formatoptions+=j "Delete comment characters when joining lines."
 set hidden "Hide files in the background instead of closing them."
 set history=1000 "Increase the undo limit."
+set nrformats-=octal "Interpret octal as decimal when incrementing numbers."
+"set shell "The shell used to execute commands.
+"set spell: "Enable spellchecking."
+set wildignore+=.pyc,.swp "Ignore files matching these patterns when opening files based on a glob pattern."
+set noswapfile "Disable swap files"
 
+
+"Load plugins"
+silent! call plug#begin('C:\Program Files (x86)\Vim\plugged')
+
+" vim-snippet
+Plug 'https://github.com/honza/vim-snippets.git'
+
+" Init plugin system
+call plug#end()
+
+
+" Map Keys"
+let mapleader=","
+nmap <leader>r :execute "! go run " . expand('%:r') 
+nmap <leader>i :execute "! go install " . expand('%:r') 
+nmap <leader>b :execute "! go build " . expand('%:r') 
 
 set diffexpr=MyDiff()
 function MyDiff()
