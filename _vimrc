@@ -78,10 +78,12 @@ call plug#end()
 
 
 " Map Keys"
+
+" GoLang"
 let mapleader=","
-nmap <leader>r :execute "! go run " . expand('%:r') 
-nmap <leader>i :execute "! go install " . expand('%:r') 
-nmap <leader>b :execute "! go build " . expand('%:r') 
+au FileType go nmap <leader>r :execute "! cls && go run " . @% <CR>
+au FileType go nmap <leader>i :execute "! cls && go install " . @% <CR>
+au FileType go nmap <leader>b :execute "! cls && go build " . @% <CR>
 
 set diffexpr=MyDiff()
 function MyDiff()
