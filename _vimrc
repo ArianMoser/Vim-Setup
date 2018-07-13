@@ -54,9 +54,10 @@ set background=dark "Use colors that suit a dark background"
 "Miscellaneous options"
 set autoread "Automatically re-read files if unmodified inside Vim."
 set backspace=indent,eol,start "Allow backspacing over indention, line breaks and insertion start."
-set backupdir=%HOME%\.cache\vim "Directory to store backup files."
+set backupdir=$HOME\.cache\vim\backup "Directory to store backup files."
 set confirm "Display a confirmation dialog when closing an unsaved file."
-set dir=%HOME%\.cache\vim "Directory to store swap files."
+set dir=$HOME\.cache\vim "Directory to store swap files."
+set undodir=$HOME\.cache\vim\undo "Directory to store undo files."
 set formatoptions+=j "Delete comment characters when joining lines."
 set hidden "Hide files in the background instead of closing them."
 set history=1000 "Increase the undo limit."
@@ -84,7 +85,8 @@ let mapleader=","
 au FileType go nmap <leader>r :update <CR> :execute "! cls && go run " . @% <CR>
 au FileType go nmap <leader>i :update <CR> :execute "! cls && go install " . @% <CR>
 au FileType go nmap <leader>b :update <CR> :execute "! cls && go build " . @% <CR>
-au FileType go nmap <leader>f :update <CR> :execute "! gofmt -w" . @% <CR>
+"au BufWritePost *.go !gofmt -w % 
+"au FileType go nmap <leader>f :update <CR> :execute "! gofmt -w" . @% <CR>
 
 set diffexpr=MyDiff()
 function MyDiff()
