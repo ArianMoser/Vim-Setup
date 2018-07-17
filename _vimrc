@@ -79,14 +79,18 @@ call plug#end()
 
 
 " Map Keys"
+let mapleader=","
 
 " GoLang"
-let mapleader=","
 au FileType go nmap <leader>r :update <CR> :execute "! cls && go run " . @% <CR>
 au FileType go nmap <leader>i :update <CR> :execute "! cls && go install " . @% <CR>
 au FileType go nmap <leader>b :update <CR> :execute "! cls && go build " . @% <CR>
 "au BufWritePost *.go !gofmt -w % 
 "au FileType go nmap <leader>f :update <CR> :execute "! gofmt -w" . @% <CR>
+
+" Markdown"
+au FileType markdown nmap <leader>p :execute "!pandoc " . @% . " -o " . expand('%:t:r') . ".pdf && start \"..\" " . expand('%:t:r') . ".pdf" <CR>
+
 
 set diffexpr=MyDiff()
 function MyDiff()
