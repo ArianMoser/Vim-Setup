@@ -38,8 +38,8 @@ set laststatus=2 "Always display status bar"
 set ruler "Always show cursor position"
 set wildmenu "Display command lines tab complete options as a menu"
 set tabpagemax=20 "Max number of tab pages that can be opened from the cmd line"
-"set colorscheme wombat256mod Change color scheme"
-set cursorline "Highlight the line currently under cursor"
+colorscheme murphy "Change color scheme"
+"set cursorline "Highlight the line currently under cursor"
 set number "enable line numbers
 set relativenumber "Show line number relative to current line"
 set noerrorbells "Disable beep on error"
@@ -89,7 +89,18 @@ au FileType go nmap <leader>b :update <CR> :execute "! cls && go build " . @% <C
 "au FileType go nmap <leader>f :update <CR> :execute "! gofmt -w" . @% <CR>
 
 " Markdown"
-au FileType markdown nmap <leader>p :execute "!pandoc " . @% . " -o " . expand('%:t:r') . ".pdf && start \"..\" " . expand('%:t:r') . ".pdf" <CR>
+au FileType markdown nmap <leader>p :update <CR> :execute "!pandoc " . @% . " -o " . expand('%:t:r') . ".pdf && start \"..\" " . expand('%:t:r') . ".pdf" <CR>
+
+" Cursor highlighting color settings"
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+
+" Highlighting that moves with cursor"
+nnoremap <leader>ml :set cursorline! cursorcolumn! <CR>
+
+" Highlighting that stayes after cursor moves"
+nnoremap <silent> <leader>msl ml:execute 'match Search /\%'.line('.').'l/'<CR> "also set marker 'l"
+nnoremap <silent> <Leader>msc :execute 'match Search /\%'.virtcol('.').'v/'<CR> 
 
 
 set diffexpr=MyDiff()
